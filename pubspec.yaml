@@ -1,8 +1,8 @@
 name: jd_adtiming_plugin
-description: A new Flutter plugin.
-version: 0.0.1
-author:
-homepage:
+description: flutter plug-in, used to be compatible with adtiming in ios and android functions
+version: 0.0.2
+author: LiJinJinJIn
+homepage: https://github.com/LiJinJinJIn/jd_adtiming_plugin
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

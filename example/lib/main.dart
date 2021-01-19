@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jd_adtiming_plugin/jd_adtiming_plugin.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   String IOS_APPKEY = 'EDFqfTqjvufhdFffteS2bELGGWW3Ifhn';
 
   void showT(String msg) {
-    Fluttertoast.showToast(msg: msg);
+    print("msg>>>       $msg ");
   }
 
   @override
@@ -48,14 +47,17 @@ class _MyAppState extends State<MyApp> {
                   adShowFailed: () => showT("adShowFailed"),
                   adClosed: () => showT("adClosed"),
                   adClicked: () => showT("adClicked"),
-                  rewardedVideoAvailabilityChanged: () => showT("rewardedVideoAvailabilityChanged"),
+                  rewardedVideoAvailabilityChanged: () =>
+                      showT("rewardedVideoAvailabilityChanged"),
                   rewardedVideoAdShowed: () => showT("rewardedVideoAdShowed"),
-                  rewardedVideoAdShowFailed: () => showT("rewardedVideoAdShowFailed"),
+                  rewardedVideoAdShowFailed: () =>
+                      showT("rewardedVideoAdShowFailed"),
                   rewardedVideoAdClicked: () => showT("rewardedVideoAdClicked"),
                   rewardedVideoAdClosed: () => showT("rewardedVideoAdClosed"),
                   rewardedVideoAdStarted: () => showT("rewardedVideoAdStarted"),
                   rewardedVideoAdEnded: () => showT("rewardedVideoAdEnded"),
-                  rewardedVideoAdRewarded: () => showT("rewardedVideoAdRewarded"),
+                  rewardedVideoAdRewarded: () =>
+                      showT("rewardedVideoAdRewarded"),
                 );
               },
             ),
@@ -121,7 +123,8 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.green,
               ),
               onTap: () {
-                jdAdtimingPlugin.testSuiteLaunch(androidAppKey: ANDROID_APPKEY, iosAppKey: IOS_APPKEY);
+                jdAdtimingPlugin.testSuiteLaunch(
+                    androidAppKey: ANDROID_APPKEY, iosAppKey: IOS_APPKEY);
               },
             ),
             SizedBox(height: 20),
@@ -134,7 +137,8 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.red,
               ),
               onTap: () {
-                jdAdtimingPlugin.checkInterstitialAd(checkInterstitialAdListener: (bool isHave) {
+                jdAdtimingPlugin.checkInterstitialAd(
+                    checkInterstitialAdListener: (bool isHave) {
                   showT("checkInterstitialAdListener:      $isHave");
                 });
               },
@@ -149,7 +153,8 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.red,
               ),
               onTap: () {
-                jdAdtimingPlugin.checkRewardedVideoAd(checkRewardedVideoAdListener: (bool isHave) {
+                jdAdtimingPlugin.checkRewardedVideoAd(
+                    checkRewardedVideoAdListener: (bool isHave) {
                   showT("checkRewardedVideoAdListener:      $isHave");
                 });
               },

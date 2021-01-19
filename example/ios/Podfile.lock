@@ -5,9 +5,6 @@ PODS:
     - FBSDKCoreKit/Basics (>= 7.0.1)
   - FBSDKCoreKit/Basics (8.2.0)
   - Flutter (1.0.0)
-  - fluttertoast (0.0.2):
-    - Flutter
-    - Toast
   - jd_adtiming_plugin (0.0.1):
     - AdTimingBidSDK (= 5.0.1)
     - AppLovinSDK (= 6.14.6)
@@ -39,13 +36,11 @@ PODS:
   - OpenMediationVungleAdapter (2.0.2):
     - OpenMediation
   - TapjoySDK (12.7.0)
-  - Toast (4.0.0)
   - UnityAds (3.5.1)
   - VungleSDK-iOS (6.8.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - jd_adtiming_plugin (from `.symlinks/plugins/jd_adtiming_plugin/ios`)
 
 SPEC REPOS:
@@ -63,15 +58,12 @@ SPEC REPOS:
     - OpenMediationUnityAdapter
     - OpenMediationVungleAdapter
     - TapjoySDK
-    - Toast
     - UnityAds
     - VungleSDK-iOS
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  fluttertoast:
-    :path: ".symlinks/plugins/fluttertoast/ios"
   jd_adtiming_plugin:
     :path: ".symlinks/plugins/jd_adtiming_plugin/ios"
 
@@ -81,7 +73,6 @@ SPEC CHECKSUMS:
   FBAudienceNetwork: 6e85fd17319e49c0234d60026bee154389badf2c
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
   jd_adtiming_plugin: 0996ba4b0fff6a086ee93fc568506fe8c5c85a20
   OpenMediation: 7d92cb2486209a71115e73da2de157010cf4b096
   OpenMediationAdTimingAdapter: 71ac1977d71d04952dc8c2c94ee8f2b5a9e37a68
@@ -92,10 +83,9 @@ SPEC CHECKSUMS:
   OpenMediationUnityAdapter: 0e6e469ceedc7ff2e1b6ac70f3217489dbc4802c
   OpenMediationVungleAdapter: d08000e5317ad3f76ee821678e6e04470e596b6c
   TapjoySDK: e863ea0d0f5d3ab3f8f12d9a9af737789d9dab6d
-  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   UnityAds: 5cf7348607675db42414a1625f88c2d560f1164c
   VungleSDK-iOS: 0405589c8626b2511dd57214a17e0d65e0d2f424
 
-PODFILE CHECKSUM: 3537b67b05cdfae37332c5f2240fcdff08906020
+PODFILE CHECKSUM: 618502e58e813b05aaed77df8b0ba34befee1bda
 
 COCOAPODS: 1.10.0

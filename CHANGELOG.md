@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* flutter plug-in, used to be compatible with adtiming in ios and android functions

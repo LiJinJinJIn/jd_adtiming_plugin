@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jd_adtiming_plugin/jd_adtiming_plugin.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('jd_adtiming_plugin');
@@ -15,9 +14,5 @@ void main() {
 
   tearDown(() {
     channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    expect(await JdAdtimingPlugin.platformVersion, '42');
   });
 }

@@ -21,7 +21,6 @@ dependencies:
     path: ../
 
   cupertino_icons: ^1.0.0
-  fluttertoast: ^7.1.6
 
 dev_dependencies:
   flutter_test:
