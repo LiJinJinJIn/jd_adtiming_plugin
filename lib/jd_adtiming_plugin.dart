@@ -139,68 +139,6 @@ class JdAdtimingPlugin {
     _channel.invokeMethod('checkRewardedVideoAd');
   }
 
-  ///初始化tapJoy
-  Future<void> initTapJoy(
-      {@required String androidAppKey,
-      @required String iosAppKey,
-      initTapJoySuccessListener: Function,
-      initTapJoyFailureListener: Function}) async {
-    _channel.setMethodCallHandler((MethodCall methodCall) {
-      switch (methodCall.method) {
-
-        ///初始化
-        case 'initTapJoy':
-          if (methodCall.arguments == "success") {
-            if (initTapJoySuccessListener != null) initTapJoySuccessListener();
-          } else {
-            if (initTapJoyFailureListener != null) initTapJoyFailureListener();
-          }
-          break;
-        default:
-      }
-      return;
-    });
-    print('xxxx123 >>>>        androidAppKey:         $androidAppKey');
-    print('xxxx123 >>>>        iosAppKey:         $iosAppKey');
-    _channel.invokeMethod('initTapJoy', <String, dynamic>{'sdkKey': Platform.isAndroid ? androidAppKey : iosAppKey});
-  }
-
-  ///加载getPlacement
-  Future<void> getPlacement({
-    @required String androidPlacementName,
-    @required String iosPlacementName,
-    @required String userId,
-    tapJoyRequestFailureListener: Function,
-    tapJoyContentReadyListener: Function,
-    tapJoyContentDismissListener: Function,
-  }) async {
-    _channel.setMethodCallHandler((MethodCall methodCall) {
-      switch (methodCall.method) {
-
-        ///初始化
-        case 'getPlacement':
-          if (methodCall.arguments == "onRequestFailure") {
-            if (tapJoyRequestFailureListener != null) tapJoyRequestFailureListener();
-          } else if (methodCall.arguments == "onContentReady") {
-            if (tapJoyContentReadyListener != null) tapJoyContentReadyListener();
-          } else if (methodCall.arguments == "onContentDismiss") {
-            if (tapJoyContentDismissListener != null) tapJoyContentDismissListener();
-          }
-          break;
-        default:
-      }
-      return;
-    });
-    print('xxxx123 >>>>        placementName:         ${Platform.isAndroid ? androidPlacementName : iosPlacementName}');
-    _channel.invokeMethod(
-        'getPlacement', <String, dynamic>{'placementName': Platform.isAndroid ? androidPlacementName : iosPlacementName, 'userid': userId});
-  }
-
-  ///发起请求
-  Future<void> requestContent() async {
-    _channel.invokeMethod('requestContent');
-  }
-
   ///测试结果展示
   Future<void> testSuiteLaunch({@required String androidAppKey, @required String iosAppKey}) async {
     _channel.invokeMethod('testSuiteLaunch', <String, dynamic>{'appKey': Platform.isAndroid ? androidAppKey : iosAppKey});
