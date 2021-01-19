@@ -2,6 +2,7 @@ package com.jd.jd_adtiming_plugin
 
 
 import android.app.Activity
+import android.util.Log
 import androidx.annotation.NonNull
 import com.openmediation.sdk.InitCallback
 import com.openmediation.sdk.InitConfiguration
@@ -13,6 +14,7 @@ import com.openmediation.sdk.utils.model.Scene
 import com.openmediation.sdk.video.RewardedVideoAd
 import com.openmediation.sdk.video.RewardedVideoListener
 import com.openmediation.testsuite.TestSuite
+import com.tapjoy.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -27,6 +29,7 @@ import java.util.*
 class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
+    private lateinit var placement: TJPlacement
 
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -131,14 +134,13 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
             }
 
-            "checkInterstitialAd"->{
+            "checkInterstitialAd" -> {
                 channel.invokeMethod("checkInterstitialAd", InterstitialAd.isReady())
             }
-            
-            "checkRewardedVideoAd"->{
+
+            "checkRewardedVideoAd" -> {
                 channel.invokeMethod("checkRewardedVideoAd", RewardedVideoAd.isReady())
             }
-
 
             "rewardedVideoAdLoad" -> {
                 RewardedVideoAd.loadAd()
@@ -155,9 +157,93 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 TestSuite.launch(activity, appKey)
             }
 
+
+            ///初始化，这里实现初始化方法
+            "initTapJoy" -> {
+                val sdkKey = call.argument<String>("sdkKey") ?: ""
+                Log.e("xxxx123", "sdkKey>>>                  $sdkKey")
+                val connectFlags = Hashtable<String, Any>()
+                connectFlags[TapjoyConnectFlag.ENABLE_LOGGING] = "true"
+                Tapjoy.connect(activity, sdkKey, connectFlags, object : TJConnectListener {
+                    override fun onConnectSuccess() {
+                        Log.e("xxxx123", "onConnectSuccess")
+                        channel.invokeMethod("initTapJoy", "success")
+                    }
+
+                    override fun onConnectFailure() {
+                        Log.e("xxxx123", "onConnectFailure")
+                        channel.invokeMethod("initTapJoy", "fail")
+                    }
+                })
+            }
+
+            "getPlacement" -> {
+                val placementName = call.argument<String>("placementName") ?: ""
+                val userid = call.argument<String>("userid") ?: ""
+                Log.e("xxxx123", "placementName>>>                  $placementName")
+                Tapjoy.setActivity(activity)
+                Tapjoy.setUserID(userid)
+                placement = Tapjoy.getPlacement(placementName, object : TJPlacementListener {
+                    override fun onClick(placement: TJPlacement?) {
+
+                    }
+
+                    override fun onContentShow(placement: TJPlacement?) {
+                    }
+
+                    override fun onRequestFailure(placement: TJPlacement?, error: TJError?) {
+                        Log.e("xxxx123", "onRequestFailure")
+                        runFuncInUIThread {
+                            channel.invokeMethod("getPlacement", "onRequestFailure")
+                        }
+                    }
+
+                    override fun onPurchaseRequest(placement: TJPlacement?, request: TJActionRequest?, productId: String?) {
+                    }
+
+                    override fun onRequestSuccess(placement: TJPlacement?) {
+                    }
+
+                    override fun onRewardRequest(placement: TJPlacement?, request: TJActionRequest?, itemId: String?, quantity: Int) {
+                    }
+
+                    override fun onContentReady(placement: TJPlacement?) {
+                        Log.e("xxxx123", "onContentReady")
+                        runFuncInUIThread {
+                            channel.invokeMethod("getPlacement", "onContentReady")
+                            if (placement != null && placement.isContentReady) {
+                                placement.showContent()
+                            }
+                        }
+
+                    }
+
+                    override fun onContentDismiss(placement: TJPlacement?) {
+                        Log.e("xxxx123", "onContentDismiss")
+                        runFuncInUIThread {
+                            channel.invokeMethod("getPlacement", "onContentDismiss")
+                        }
+                    }
+
+                })
+            }
+
+            "requestContent" -> {
+                if (Tapjoy.isConnected()) {
+                    placement.requestContent()
+                }
+            }
+
             else -> {
                 result.notImplemented()
             }
+        }
+    }
+
+
+    fun runFuncInUIThread(action: () -> Unit) {
+        activity.runOnUiThread {
+            action()
         }
     }
 
