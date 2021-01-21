@@ -21,14 +21,6 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
             OMRewardedVideo.sharedInstance().add(self)
             OMInterstitial.sharedInstance().add(self)
 
-        case "testSuiteLaunch":
-            guard let dic = call.arguments as? Dictionary<String, Any> else { return }
-            let appKey = dic["appKey"] as? String ?? ""
-            let viewController = UIApplication.shared.keyWindow?.rootViewController as? FlutterViewController
-            if (viewController != nil) {
-                OMTestSuite.present(withAppKey: appKey, on:viewController!)
-            }
-            
         case "rewardedVideoAdLoad":
             OMRewardedVideo.load()
             

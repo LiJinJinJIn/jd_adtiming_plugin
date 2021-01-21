@@ -40,5 +40,4 @@ A new Flutter plugin.
   s.dependency 'OpenMediationAdTimingAdapter', '2.0.2'
   
   s.dependency 'OpenMediation', '2.0.3'
-  s.dependency 'OpenMediationTestSuite','1.3.0'
 end

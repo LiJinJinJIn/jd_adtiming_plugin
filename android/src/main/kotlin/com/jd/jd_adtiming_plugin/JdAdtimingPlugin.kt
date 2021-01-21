@@ -12,7 +12,6 @@ import com.openmediation.sdk.utils.error.Error
 import com.openmediation.sdk.utils.model.Scene
 import com.openmediation.sdk.video.RewardedVideoAd
 import com.openmediation.sdk.video.RewardedVideoListener
-import com.openmediation.testsuite.TestSuite
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -148,11 +147,6 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 if (RewardedVideoAd.isReady()) {
                     RewardedVideoAd.showAd()
                 }
-            }
-
-            "testSuiteLaunch" -> {
-                val appKey = call.argument<String>("appKey") ?: ""
-                TestSuite.launch(activity, appKey)
             }
 
             else -> {

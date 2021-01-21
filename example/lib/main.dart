@@ -12,8 +12,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   JdAdtimingPlugin jdAdtimingPlugin = JdAdtimingPlugin();
-  String ANDROID_APPKEY = 'i4hJpBqGWk80AecsmbbtnzE33Mp2Cnab';
-  String IOS_APPKEY = 'EDFqfTqjvufhdFffteS2bELGGWW3Ifhn';
+  String ANDROID_APPKEY = 'your android appkey';
+  String IOS_APPKEY = 'your ios appkey';
 
   void showT(String msg) {
     print("msg>>>       $msg ");
@@ -114,19 +114,7 @@ class _MyAppState extends State<MyApp> {
               },
             ),
             SizedBox(height: 20),
-            InkWell(
-              child: Container(
-                alignment: Alignment.center,
-                width: 200,
-                height: 40,
-                child: Text('测试'),
-                color: Colors.green,
-              ),
-              onTap: () {
-                jdAdtimingPlugin.testSuiteLaunch(
-                    androidAppKey: ANDROID_APPKEY, iosAppKey: IOS_APPKEY);
-              },
-            ),
+
             SizedBox(height: 20),
             InkWell(
               child: Container(

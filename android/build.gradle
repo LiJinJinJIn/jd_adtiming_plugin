@@ -83,7 +83,4 @@ dependencies {
     implementation 'com.adtiming:adnetwork:6.8.0@aar'
     implementation 'com.openmediation.adapters:adtiming:2.0.0'
 
-
-    //测试
-    implementation 'com.openmediation:test-suite:1.1.0'
 }
