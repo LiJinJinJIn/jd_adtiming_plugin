@@ -42,22 +42,6 @@ class _MyAppState extends State<MyApp> {
                   iosAppKey: IOS_APPKEY,
                   success: () => showT("success"),
                   fail: () => showT("fail"),
-                  adAvailabilityChanged: () => showT("adAvailabilityChanged"),
-                  adShowed: () => showT("adShowed"),
-                  adShowFailed: () => showT("adShowFailed"),
-                  adClosed: () => showT("adClosed"),
-                  adClicked: () => showT("adClicked"),
-                  rewardedVideoAvailabilityChanged: () =>
-                      showT("rewardedVideoAvailabilityChanged"),
-                  rewardedVideoAdShowed: () => showT("rewardedVideoAdShowed"),
-                  rewardedVideoAdShowFailed: () =>
-                      showT("rewardedVideoAdShowFailed"),
-                  rewardedVideoAdClicked: () => showT("rewardedVideoAdClicked"),
-                  rewardedVideoAdClosed: () => showT("rewardedVideoAdClosed"),
-                  rewardedVideoAdStarted: () => showT("rewardedVideoAdStarted"),
-                  rewardedVideoAdEnded: () => showT("rewardedVideoAdEnded"),
-                  rewardedVideoAdRewarded: () =>
-                      showT("rewardedVideoAdRewarded"),
                 );
               },
             ),
@@ -85,6 +69,14 @@ class _MyAppState extends State<MyApp> {
               ),
               onTap: () {
                 jdAdtimingPlugin.interstitialShowLoad();
+
+                jdAdtimingPlugin.setInterstitialAdListener(
+                  adAvailabilityChanged: () => showT("adAvailabilityChanged"),
+                  adShowed: () => showT("adShowed"),
+                  adShowFailed: () => showT("adShowFailed"),
+                  adClosed: () => showT("adClosed"),
+                  adClicked: () => showT("adClicked"),
+                );
               },
             ),
             SizedBox(height: 20),
@@ -111,10 +103,20 @@ class _MyAppState extends State<MyApp> {
               ),
               onTap: () {
                 jdAdtimingPlugin.rewardedVideoShowLoad();
+
+                jdAdtimingPlugin.setRewardedVideoAdListener(
+                  rewardedVideoAvailabilityChanged: () => showT("rewardedVideoAvailabilityChanged"),
+                  rewardedVideoAdShowed: () => showT("rewardedVideoAdShowed"),
+                  rewardedVideoAdShowFailed: () => showT("rewardedVideoAdShowFailed"),
+                  rewardedVideoAdClicked: () => showT("rewardedVideoAdClicked"),
+                  rewardedVideoAdClosed: () => showT("rewardedVideoAdClosed"),
+                  rewardedVideoAdStarted: () => showT("rewardedVideoAdStarted"),
+                  rewardedVideoAdEnded: () => showT("rewardedVideoAdEnded"),
+                  rewardedVideoAdRewarded: () => showT("rewardedVideoAdRewarded"),
+                );
               },
             ),
             SizedBox(height: 20),
-
             SizedBox(height: 20),
             InkWell(
               child: Container(
@@ -125,8 +127,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.red,
               ),
               onTap: () {
-                jdAdtimingPlugin.checkInterstitialAd(
-                    checkInterstitialAdListener: (bool isHave) {
+                jdAdtimingPlugin.checkInterstitialAd(checkInterstitialAdListener: (bool isHave) {
                   showT("checkInterstitialAdListener:      $isHave");
                 });
               },
@@ -141,8 +142,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.red,
               ),
               onTap: () {
-                jdAdtimingPlugin.checkRewardedVideoAd(
-                    checkRewardedVideoAdListener: (bool isHave) {
+                jdAdtimingPlugin.checkRewardedVideoAd(checkRewardedVideoAdListener: (bool isHave) {
                   showT("checkRewardedVideoAdListener:      $isHave");
                 });
               },

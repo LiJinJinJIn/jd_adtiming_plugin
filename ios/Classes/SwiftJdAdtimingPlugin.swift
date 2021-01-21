@@ -28,7 +28,7 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
             if OMRewardedVideo.sharedInstance().isReady() {
                 let viewController = UIApplication.shared.keyWindow?.rootViewController as? FlutterViewController
                 if (viewController != nil) {
-                    OMRewardedVideo.sharedInstance().show(with: viewController!, scene: "YOUR_SCENE_NAME")
+                    OMRewardedVideo.sharedInstance().show(with: viewController!, scene: "")
                 }
                 
             }
@@ -39,7 +39,7 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
             if OMInterstitial.sharedInstance().isReady() {
                 let viewController = UIApplication.shared.keyWindow?.rootViewController as? FlutterViewController
                 if (viewController != nil) {
-                    OMInterstitial.sharedInstance().show(with: viewController!, scene: "YOUR_SCENE_NAME")
+                    OMInterstitial.sharedInstance().show(with: viewController!, scene: "")
                 }
             }
             

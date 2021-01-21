@@ -23,7 +23,7 @@ import java.util.*
 
 
 /** JdAdtimingPlugin */
-class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
 
@@ -82,6 +82,8 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     }
                 })
 
+
+
                 RewardedVideoAd.setAdListener(object : RewardedVideoListener {
                     override fun onRewardedVideoAvailabilityChanged(available: Boolean) {
                         if (available) {
@@ -127,6 +129,8 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "interstitialShowLoad" -> {
                 if (InterstitialAd.isReady()) {
                     InterstitialAd.showAd()
+
+
                 }
             }
 
@@ -167,4 +171,5 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onDetachedFromActivityForConfigChanges() {
     }
+
 }

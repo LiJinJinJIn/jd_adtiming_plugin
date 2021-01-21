@@ -15,19 +15,6 @@ class JdAdtimingPlugin {
     @required String iosAppKey,
     success: Function,
     fail: Function,
-    adAvailabilityChanged: Function,
-    adShowed: Function,
-    adShowFailed: Function,
-    adClosed: Function,
-    adClicked: Function,
-    rewardedVideoAvailabilityChanged: Function,
-    rewardedVideoAdShowed: Function,
-    rewardedVideoAdShowFailed: Function,
-    rewardedVideoAdClicked: Function,
-    rewardedVideoAdClosed: Function,
-    rewardedVideoAdStarted: Function,
-    rewardedVideoAdEnded: Function,
-    rewardedVideoAdRewarded: Function,
   }) async {
     _channel.setMethodCallHandler((MethodCall methodCall) {
       switch (methodCall.method) {
@@ -40,21 +27,26 @@ class JdAdtimingPlugin {
             if (fail != null) fail();
           }
           break;
+        default:
+      }
+      return;
+    });
 
-        ///差评广告监听
-        case 'interstitialAdListener':
-          if (methodCall.arguments == "interstitialAdAvailabilityChanged") {
-            if (adAvailabilityChanged != null) adAvailabilityChanged();
-          } else if (methodCall.arguments == "interstitialAdShowed") {
-            if (adShowed != null) adShowed();
-          } else if (methodCall.arguments == "interstitialAdShowFailed") {
-            if (adShowFailed != null) adShowFailed();
-          } else if (methodCall.arguments == "interstitialAdClosed") {
-            if (adClosed != null) adClosed();
-          } else if (methodCall.arguments == "interstitialAdClicked") {
-            if (adClicked != null) adClicked();
-          }
-          break;
+    _channel.invokeMethod('init', <String, dynamic>{'appKey': Platform.isAndroid ? androidAppKey : iosAppKey});
+  }
+
+  Future<void> setRewardedVideoAdListener({
+    rewardedVideoAvailabilityChanged: Function,
+    rewardedVideoAdShowed: Function,
+    rewardedVideoAdShowFailed: Function,
+    rewardedVideoAdClicked: Function,
+    rewardedVideoAdClosed: Function,
+    rewardedVideoAdStarted: Function,
+    rewardedVideoAdEnded: Function,
+    rewardedVideoAdRewarded: Function,
+  }) async {
+    _channel.setMethodCallHandler((MethodCall methodCall) {
+      switch (methodCall.method) {
 
         ///激励广告监听
         case 'rewardedVideoAdListener':
@@ -81,8 +73,38 @@ class JdAdtimingPlugin {
       }
       return;
     });
+  }
 
-    _channel.invokeMethod('init', <String, dynamic>{'appKey': Platform.isAndroid ? androidAppKey : iosAppKey});
+  ///todo
+  Future<void> setInterstitialAdListener({
+    adAvailabilityChanged: Function,
+    adShowed: Function,
+    adShowFailed: Function,
+    adClosed: Function,
+    adClicked: Function,
+  }) async {
+    _channel.setMethodCallHandler((MethodCall methodCall) {
+      switch (methodCall.method) {
+
+        ///差评广告监听
+        case 'interstitialAdListener':
+          if (methodCall.arguments == "interstitialAdAvailabilityChanged") {
+            if (adAvailabilityChanged != null) adAvailabilityChanged();
+          } else if (methodCall.arguments == "interstitialAdShowed") {
+            if (adShowed != null) adShowed();
+          } else if (methodCall.arguments == "interstitialAdShowFailed") {
+            if (adShowFailed != null) adShowFailed();
+          } else if (methodCall.arguments == "interstitialAdClosed") {
+            if (adClosed != null) adClosed();
+          } else if (methodCall.arguments == "interstitialAdClicked") {
+            if (adClicked != null) adClicked();
+          }
+          break;
+
+        default:
+      }
+      return;
+    });
   }
 
   ///加载插屏广告
