@@ -128,37 +128,13 @@ class JdAdtimingPlugin {
   }
 
   ///检测插屏广告
-  Future<void> checkInterstitialAd({checkInterstitialAdListener: Function}) async {
-    _channel.setMethodCallHandler((MethodCall methodCall) {
-      switch (methodCall.method) {
-
-        ///初始化
-        case 'checkInterstitialAd':
-          if (checkInterstitialAd != null) checkInterstitialAdListener(methodCall.arguments);
-          break;
-        default:
-      }
-      return;
-    });
-
-    _channel.invokeMethod('checkInterstitialAd');
+  Future<bool> checkInterstitialAd({checkInterstitialAdListener: Function}) async {
+    return await _channel.invokeMethod('checkInterstitialAd');
   }
 
   ///检测激励广告
-  Future<void> checkRewardedVideoAd({checkRewardedVideoAdListener: Function}) async {
-    _channel.setMethodCallHandler((MethodCall methodCall) {
-      switch (methodCall.method) {
-
-        ///初始化
-        case 'checkRewardedVideoAd':
-          if (checkInterstitialAd != null) checkRewardedVideoAdListener(methodCall.arguments);
-          break;
-        default:
-      }
-      return;
-    });
-
-    _channel.invokeMethod('checkRewardedVideoAd');
+  Future<bool> checkRewardedVideoAd({checkRewardedVideoAdListener: Function}) async {
+    return await _channel.invokeMethod('checkRewardedVideoAd');
   }
 
   ///测试结果展示

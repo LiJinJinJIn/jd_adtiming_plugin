@@ -12,8 +12,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   JdAdtimingPlugin jdAdtimingPlugin = JdAdtimingPlugin();
+
   String ANDROID_APPKEY = 'your android appkey';
   String IOS_APPKEY = 'your ios appkey';
+
 
   void showT(String msg) {
     print("msg>>>       $msg ");
@@ -123,13 +125,12 @@ class _MyAppState extends State<MyApp> {
                 alignment: Alignment.center,
                 width: 200,
                 height: 40,
-                child: Text('检测是否有激励广告'),
+                child: Text('检测是否有插屏广告'),
                 color: Colors.red,
               ),
-              onTap: () {
-                jdAdtimingPlugin.checkInterstitialAd(checkInterstitialAdListener: (bool isHave) {
-                  showT("checkInterstitialAdListener:      $isHave");
-                });
+              onTap: () async{
+                var isHave = await  jdAdtimingPlugin.checkInterstitialAd();
+                showT("checkInterstitialAdListener:      $isHave");
               },
             ),
             SizedBox(height: 20),
@@ -138,13 +139,12 @@ class _MyAppState extends State<MyApp> {
                 alignment: Alignment.center,
                 width: 200,
                 height: 40,
-                child: Text('检测是否有插屏广告'),
+                child: Text('检测是否有激励广告'),
                 color: Colors.red,
               ),
-              onTap: () {
-                jdAdtimingPlugin.checkRewardedVideoAd(checkRewardedVideoAdListener: (bool isHave) {
-                  showT("checkRewardedVideoAdListener:      $isHave");
-                });
+              onTap: () async {
+                var isHave = await jdAdtimingPlugin.checkRewardedVideoAd();
+                showT("checkRewardedVideoAdListener:      $isHave");
               },
             ),
           ],

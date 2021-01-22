@@ -44,10 +44,11 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
             }
             
         case "checkInterstitialAd":
-            SwiftJdAdtimingPlugin.channel.invokeMethod("checkInterstitialAd", arguments: OMInterstitial.sharedInstance().isReady())
+            result(OMInterstitial.sharedInstance().isReady());
             
         case "checkRewardedVideoAd":
-            SwiftJdAdtimingPlugin.channel.invokeMethod("checkRewardedVideoAd", arguments: OMRewardedVideo.sharedInstance().isReady())
+            result(OMRewardedVideo.sharedInstance().isReady());
+
         default:
             break
     }

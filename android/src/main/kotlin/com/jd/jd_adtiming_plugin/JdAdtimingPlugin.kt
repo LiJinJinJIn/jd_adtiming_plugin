@@ -129,17 +129,15 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
             "interstitialShowLoad" -> {
                 if (InterstitialAd.isReady()) {
                     InterstitialAd.showAd()
-
-
                 }
             }
 
             "checkInterstitialAd"->{
-                channel.invokeMethod("checkInterstitialAd", InterstitialAd.isReady())
+                result.success(InterstitialAd.isReady())
             }
             
             "checkRewardedVideoAd"->{
-                channel.invokeMethod("checkRewardedVideoAd", RewardedVideoAd.isReady())
+                result.success(RewardedVideoAd.isReady())
             }
 
 
