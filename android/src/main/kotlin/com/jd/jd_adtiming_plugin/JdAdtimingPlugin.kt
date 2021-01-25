@@ -23,7 +23,7 @@ import java.util.*
 
 
 /** JdAdtimingPlugin */
-class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
+class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
 
@@ -60,9 +60,6 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
 
                 InterstitialAd.setAdListener(object : InterstitialAdListener {
                     override fun onInterstitialAdAvailabilityChanged(available: Boolean) {
-                        if (available) {
-                            channel.invokeMethod("interstitialAdListener", "interstitialAdAvailabilityChanged")
-                        }
                     }
 
                     override fun onInterstitialAdShowed(scene: Scene) {
@@ -78,7 +75,6 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
                     }
 
                     override fun onInterstitialAdClicked(scene: Scene) {
-                        channel.invokeMethod("interstitialAdListener", "interstitialAdClicked")
                     }
                 })
 
@@ -86,9 +82,6 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
 
                 RewardedVideoAd.setAdListener(object : RewardedVideoListener {
                     override fun onRewardedVideoAvailabilityChanged(available: Boolean) {
-                        if (available) {
-                            channel.invokeMethod("rewardedVideoAdListener", "rewardedVideoAvailabilityChanged")
-                        }
                     }
 
                     override fun onRewardedVideoAdShowed(scene: Scene) {
@@ -100,7 +93,6 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
                     }
 
                     override fun onRewardedVideoAdClicked(scene: Scene) {
-                        channel.invokeMethod("rewardedVideoAdListener", "rewardedVideoAdClicked")
                     }
 
                     override fun onRewardedVideoAdClosed(scene: Scene) {
@@ -108,15 +100,12 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
                     }
 
                     override fun onRewardedVideoAdStarted(scene: Scene) {
-                        channel.invokeMethod("rewardedVideoAdListener", "rewardedVideoAdStarted")
                     }
 
                     override fun onRewardedVideoAdEnded(scene: Scene) {
-                        channel.invokeMethod("rewardedVideoAdListener", "rewardedVideoAdEnded")
                     }
 
                     override fun onRewardedVideoAdRewarded(scene: Scene) {
-                        channel.invokeMethod("rewardedVideoAdListener", "rewardedVideoAdRewarded")
                     }
                 })
 
@@ -132,11 +121,11 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
                 }
             }
 
-            "checkInterstitialAd"->{
+            "checkInterstitialAd" -> {
                 result.success(InterstitialAd.isReady())
             }
-            
-            "checkRewardedVideoAd"->{
+
+            "checkRewardedVideoAd" -> {
                 result.success(RewardedVideoAd.isReady())
             }
 
@@ -146,7 +135,9 @@ class JdAdtimingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware  {
             }
 
             "rewardedVideoShowLoad" -> {
+                val extId = call.argument<String>("extId") ?: ""
                 if (RewardedVideoAd.isReady()) {
+                    RewardedVideoAd.setExtId("", extId)
                     RewardedVideoAd.showAd()
                 }
             }

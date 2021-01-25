@@ -36,38 +36,22 @@ class JdAdtimingPlugin {
   }
 
   Future<void> setRewardedVideoAdListener({
-    rewardedVideoAvailabilityChanged: Function,
     rewardedVideoAdShowed: Function,
     rewardedVideoAdShowFailed: Function,
-    rewardedVideoAdClicked: Function,
     rewardedVideoAdClosed: Function,
-    rewardedVideoAdStarted: Function,
-    rewardedVideoAdEnded: Function,
-    rewardedVideoAdRewarded: Function,
   }) async {
     _channel.setMethodCallHandler((MethodCall methodCall) {
       switch (methodCall.method) {
 
         ///激励广告监听
         case 'rewardedVideoAdListener':
-          if (methodCall.arguments == "rewardedVideoAvailabilityChanged") {
-            if (rewardedVideoAvailabilityChanged != null) rewardedVideoAvailabilityChanged();
-          } else if (methodCall.arguments == "interstitialAdShowed") {
+          if (methodCall.arguments == "interstitialAdShowed") {
             if (rewardedVideoAdShowed != null) rewardedVideoAdShowed();
           } else if (methodCall.arguments == "rewardedVideoAdShowFailed") {
             if (rewardedVideoAdShowFailed != null) rewardedVideoAdShowFailed();
-          } else if (methodCall.arguments == "rewardedVideoAdClicked") {
-            if (rewardedVideoAdClicked != null) rewardedVideoAdClicked();
           } else if (methodCall.arguments == "rewardedVideoAdClosed") {
             if (rewardedVideoAdClosed != null) rewardedVideoAdClosed();
-          } else if (methodCall.arguments == "rewardedVideoAdStarted") {
-            if (rewardedVideoAdStarted != null) rewardedVideoAdStarted();
-          } else if (methodCall.arguments == "rewardedVideoAdEnded") {
-            if (rewardedVideoAdEnded != null) rewardedVideoAdEnded();
-          } else if (methodCall.arguments == "rewardedVideoAdRewarded") {
-            if (rewardedVideoAdRewarded != null) rewardedVideoAdRewarded();
           }
-
           break;
         default:
       }
@@ -77,27 +61,21 @@ class JdAdtimingPlugin {
 
   ///todo
   Future<void> setInterstitialAdListener({
-    adAvailabilityChanged: Function,
     adShowed: Function,
     adShowFailed: Function,
     adClosed: Function,
-    adClicked: Function,
   }) async {
     _channel.setMethodCallHandler((MethodCall methodCall) {
       switch (methodCall.method) {
 
         ///差评广告监听
         case 'interstitialAdListener':
-          if (methodCall.arguments == "interstitialAdAvailabilityChanged") {
-            if (adAvailabilityChanged != null) adAvailabilityChanged();
-          } else if (methodCall.arguments == "interstitialAdShowed") {
+          if (methodCall.arguments == "interstitialAdShowed") {
             if (adShowed != null) adShowed();
           } else if (methodCall.arguments == "interstitialAdShowFailed") {
             if (adShowFailed != null) adShowFailed();
           } else if (methodCall.arguments == "interstitialAdClosed") {
             if (adClosed != null) adClosed();
-          } else if (methodCall.arguments == "interstitialAdClicked") {
-            if (adClicked != null) adClicked();
           }
           break;
 
@@ -123,8 +101,8 @@ class JdAdtimingPlugin {
   }
 
   ///展示激励广告
-  Future<void> rewardedVideoShowLoad() async {
-    _channel.invokeMethod('rewardedVideoShowLoad');
+  Future<void> rewardedVideoShowLoad({String extId}) async {
+    _channel.invokeMethod('rewardedVideoShowLoad', <String, dynamic>{'extId': extId});
   }
 
   ///检测插屏广告

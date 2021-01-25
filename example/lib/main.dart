@@ -73,11 +73,9 @@ class _MyAppState extends State<MyApp> {
                 jdAdtimingPlugin.interstitialShowLoad();
 
                 jdAdtimingPlugin.setInterstitialAdListener(
-                  adAvailabilityChanged: () => showT("adAvailabilityChanged"),
                   adShowed: () => showT("adShowed"),
                   adShowFailed: () => showT("adShowFailed"),
                   adClosed: () => showT("adClosed"),
-                  adClicked: () => showT("adClicked"),
                 );
               },
             ),
@@ -107,14 +105,9 @@ class _MyAppState extends State<MyApp> {
                 jdAdtimingPlugin.rewardedVideoShowLoad();
 
                 jdAdtimingPlugin.setRewardedVideoAdListener(
-                  rewardedVideoAvailabilityChanged: () => showT("rewardedVideoAvailabilityChanged"),
                   rewardedVideoAdShowed: () => showT("rewardedVideoAdShowed"),
                   rewardedVideoAdShowFailed: () => showT("rewardedVideoAdShowFailed"),
-                  rewardedVideoAdClicked: () => showT("rewardedVideoAdClicked"),
                   rewardedVideoAdClosed: () => showT("rewardedVideoAdClosed"),
-                  rewardedVideoAdStarted: () => showT("rewardedVideoAdStarted"),
-                  rewardedVideoAdEnded: () => showT("rewardedVideoAdEnded"),
-                  rewardedVideoAdRewarded: () => showT("rewardedVideoAdRewarded"),
                 );
               },
             ),

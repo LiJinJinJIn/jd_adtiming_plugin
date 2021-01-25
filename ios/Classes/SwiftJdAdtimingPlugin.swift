@@ -25,10 +25,12 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
             OMRewardedVideo.load()
             
         case "rewardedVideoShowLoad":
+            guard let dic = call.arguments as? Dictionary<String, Any> else { return }
+            let extId = dic["extId"] as? String ?? ""
             if OMRewardedVideo.sharedInstance().isReady() {
                 let viewController = UIApplication.shared.keyWindow?.rootViewController as? FlutterViewController
                 if (viewController != nil) {
-                    OMRewardedVideo.sharedInstance().show(with: viewController!, scene: "")
+                    OMRewardedVideo.sharedInstance().show(with: viewController!, scene: "",extraParams: extId)
                 }
                 
             }
@@ -48,16 +50,15 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
             
         case "checkRewardedVideoAd":
             result(OMRewardedVideo.sharedInstance().isReady());
-
+            
         default:
             break
     }
   }
     
     
-    // 插屏广告回调
+  // 插屏广告回调
   public func omInterstitialChangedAvailability(_ available: Bool) {
-    SwiftJdAdtimingPlugin.channel.invokeMethod("interstitialAdListener", arguments: "interstitialAdAvailabilityChanged")
   }
     
   public func omInterstitialDidShow(_ scene: OMScene) {
@@ -65,7 +66,6 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
   }
     
   public func omInterstitialDidClick(_ scene: OMScene) {
-    SwiftJdAdtimingPlugin.channel.invokeMethod("interstitialAdListener", arguments: "interstitialAdClicked")
   }
     
   public func omInterstitialDidClose(_ scene: OMScene) {
@@ -78,7 +78,6 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
     
     // 激励广告回调
   public func omRewardedVideoChangedAvailability(_ available: Bool) {
-    SwiftJdAdtimingPlugin.channel.invokeMethod("rewardedVideoAdListener", arguments: "rewardedVideoAvailabilityChanged")
   }
 
   public func omRewardedVideoPlayStart(_ scene: OMScene) {
@@ -86,15 +85,12 @@ public class SwiftJdAdtimingPlugin: NSObject, FlutterPlugin ,OMRewardedVideoDele
   }
     
   public func omRewardedVideoPlayEnd(_ scene: OMScene) {
-    SwiftJdAdtimingPlugin.channel.invokeMethod("rewardedVideoAdListener", arguments: "rewardedVideoAdEnded")
   }
     
   public func omRewardedVideoDidClick(_ scene: OMScene) {
-    SwiftJdAdtimingPlugin.channel.invokeMethod("rewardedVideoAdListener", arguments: "rewardedVideoAdClicked")
   }
     
   public func omRewardedVideoDidReceiveReward(_ scene: OMScene) {
-    SwiftJdAdtimingPlugin.channel.invokeMethod("rewardedVideoAdListener", arguments: "rewardedVideoAdRewarded")
   }
     
   public func omRewardedVideoDidClose(_ scene: OMScene) {
