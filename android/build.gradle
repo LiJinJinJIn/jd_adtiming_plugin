@@ -50,8 +50,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'com.openmediation:om-android-sdk:2.0.0'
 
     // for Facebook

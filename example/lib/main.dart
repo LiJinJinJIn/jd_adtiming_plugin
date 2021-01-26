@@ -16,7 +16,6 @@ class _MyAppState extends State<MyApp> {
   String ANDROID_APPKEY = 'your android appkey';
   String IOS_APPKEY = 'your ios appkey';
 
-
   void showT(String msg) {
     print("msg>>>       $msg ");
   }
@@ -73,9 +72,9 @@ class _MyAppState extends State<MyApp> {
                 jdAdtimingPlugin.interstitialShowLoad();
 
                 jdAdtimingPlugin.setInterstitialAdListener(
-                  adShowed: () => showT("adShowed"),
-                  adShowFailed: () => showT("adShowFailed"),
-                  adClosed: () => showT("adClosed"),
+                  interstitialAdShowedListener: () => showT("adShowed"),
+                  interstitialAdShowFailedListener: () => showT("adShowFailed"),
+                  interstitialAdClosedListener: () => showT("adClosed"),
                 );
               },
             ),
@@ -105,9 +104,9 @@ class _MyAppState extends State<MyApp> {
                 jdAdtimingPlugin.rewardedVideoShowLoad();
 
                 jdAdtimingPlugin.setRewardedVideoAdListener(
-                  rewardedVideoAdShowed: () => showT("rewardedVideoAdShowed"),
-                  rewardedVideoAdShowFailed: () => showT("rewardedVideoAdShowFailed"),
-                  rewardedVideoAdClosed: () => showT("rewardedVideoAdClosed"),
+                  rewardedVideoAdShowedListener: () => showT("rewardedVideoAdShowed"),
+                  rewardedVideoAdShowFailedListener: () => showT("rewardedVideoAdShowFailed"),
+                  rewardedVideoAdClosedListener: () => showT("rewardedVideoAdClosed"),
                 );
               },
             ),
@@ -121,8 +120,8 @@ class _MyAppState extends State<MyApp> {
                 child: Text('检测是否有插屏广告'),
                 color: Colors.red,
               ),
-              onTap: () async{
-                var isHave = await  jdAdtimingPlugin.checkInterstitialAd();
+              onTap: () async {
+                var isHave = await jdAdtimingPlugin.checkInterstitialAd();
                 showT("checkInterstitialAdListener:      $isHave");
               },
             ),

@@ -35,22 +35,21 @@ class JdAdtimingPlugin {
     _channel.invokeMethod('init', <String, dynamic>{'appKey': Platform.isAndroid ? androidAppKey : iosAppKey});
   }
 
+  ///激励广告监听
   Future<void> setRewardedVideoAdListener({
-    rewardedVideoAdShowed: Function,
-    rewardedVideoAdShowFailed: Function,
-    rewardedVideoAdClosed: Function,
+    rewardedVideoAdShowedListener: Function,
+    rewardedVideoAdShowFailedListener: Function,
+    rewardedVideoAdClosedListener: Function,
   }) async {
     _channel.setMethodCallHandler((MethodCall methodCall) {
       switch (methodCall.method) {
-
-        ///激励广告监听
         case 'rewardedVideoAdListener':
-          if (methodCall.arguments == "interstitialAdShowed") {
-            if (rewardedVideoAdShowed != null) rewardedVideoAdShowed();
+          if (methodCall.arguments == "rewardedVideoAdShowed") {
+            if (rewardedVideoAdShowedListener != null) rewardedVideoAdShowedListener();
           } else if (methodCall.arguments == "rewardedVideoAdShowFailed") {
-            if (rewardedVideoAdShowFailed != null) rewardedVideoAdShowFailed();
+            if (rewardedVideoAdShowFailedListener != null) rewardedVideoAdShowFailedListener();
           } else if (methodCall.arguments == "rewardedVideoAdClosed") {
-            if (rewardedVideoAdClosed != null) rewardedVideoAdClosed();
+            if (rewardedVideoAdClosedListener != null) rewardedVideoAdClosedListener();
           }
           break;
         default:
@@ -59,23 +58,21 @@ class JdAdtimingPlugin {
     });
   }
 
-  ///todo
+  ///插屏广告监听
   Future<void> setInterstitialAdListener({
-    adShowed: Function,
-    adShowFailed: Function,
-    adClosed: Function,
+    interstitialAdShowedListener: Function,
+    interstitialAdShowFailedListener: Function,
+    interstitialAdClosedListener: Function,
   }) async {
     _channel.setMethodCallHandler((MethodCall methodCall) {
       switch (methodCall.method) {
-
-        ///差评广告监听
         case 'interstitialAdListener':
           if (methodCall.arguments == "interstitialAdShowed") {
-            if (adShowed != null) adShowed();
+            if (interstitialAdShowedListener != null) interstitialAdShowedListener();
           } else if (methodCall.arguments == "interstitialAdShowFailed") {
-            if (adShowFailed != null) adShowFailed();
+            if (interstitialAdShowFailedListener != null) interstitialAdShowFailedListener();
           } else if (methodCall.arguments == "interstitialAdClosed") {
-            if (adClosed != null) adClosed();
+            if (interstitialAdClosedListener != null) interstitialAdClosedListener();
           }
           break;
 
