@@ -54,8 +54,8 @@ dependencies {
 
     // for Facebook
     //fb https://developers.facebook.com/docs/audience-network/changelog-android/
-    implementation 'com.facebook.android:audience-network-sdk:6.5.1'
-    implementation 'com.openmediation.adapters:facebook:2.3.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
+    implementation 'com.openmediation.adapters:facebook:2.0.0'
 
     // for UnityAds
     //unity https://github.com/Unity-Technologies/unity-ads-android/releases
@@ -75,12 +75,11 @@ dependencies {
 
     // for Tapjoy
     //TapJoy https://ltv.tapjoy.com/d/sdks
-    implementation 'com.tapjoy:tapjoy-android-sdk:12.8.1@aar'
+    implementation 'com.tapjoy:tapjoy-android-sdk:12.7.1@aar'
     implementation 'com.openmediation.adapters:tapjoy:2.3.0'
 
     // for AdTiming
     // adtiming https://support.adtiming.com/hc/en-us/articles/360025307893
-    implementation 'com.adtiming:adnetwork:6.9.2@aar'
-    implementation 'com.openmediation.adapters:adtiming:2.3.1'
-
+    implementation 'com.adtiming:adnetwork:6.8.0@aar'
+    implementation 'com.openmediation.adapters:adtiming:2.0.0'
 }
